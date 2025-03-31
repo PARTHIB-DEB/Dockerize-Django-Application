@@ -92,27 +92,81 @@ After building your project by docker in your local IDE , now its time to push i
 - After that you can run all the images with necessary aliases (like database details)
 
 ## Commands 
+
+### Local Execution
+- Build the project
+  ```bash
+      docker compose build
+  ```
+- Run the build
+  ```bash
+      docker compose up
+  ```
+- Or you can do both in one
+  ```bash
+      docker-compose up -- build
+  ```
+  
+### Global Execution
+- Login to Docker-Hub
+  for first-time , maybe you need to put a one-time code in the docker-hub website to authenticate
+  ```bash
+      docker login
+  ```
+
+- Build the project
+  ```bash
+      docker build -t <default - latest> username/repo-name .
+  ```
+- Push the build to docker-hub
+  ```bash
+      docker push username/repo-name:tag
+  ```
+Hereafter I suggest you to stop all containers and their images to start over and see the magic 🌠.
+For that follow my **general docker commands** section ⬆️
+
+- Create your own network of type **bridge** in your docker installed machine
+  ```bash
+      docker network create my-network    # change my-network to your favorite name
+  ```
+- Pull the image of your project from docker
+  ```bash
+      docker pull username/repo-name:tag
+  ```
+- Pull the base image / independent dependencies' images / postgresl's image (for this cheatsheet)
+  ```bash
+      docker pull postgreseql:version-tagname
+  ```
+- Connect all images to your network
+  ```bash
+      docker network connect NETWORK-NAME/ID CONTAINER-NAME/ID
+  ```
+- Run all images
+  Why didn't you built now ? becaue you already sent your built-files to docker-hub , so now you are just pulling and running it . Same happens for base images
+    ```bash
+                docker run -d --name database-container-name --network my-network \
+          -e POSTGRES_USER=your_db_user \
+          -e POSTGRES_PASSWORD=your_db_password \
+          -e POSTGRES_DB=your_db_name \
+          -p 5432:5432 \
+
+    
+          docker run -d --name your-project-container-name --network my-network \
+      -e DB_HOST=farmers-db \
+      -e DB_USER=your_db_user \
+      -e DB_PASSWORD=your_db_password \
+      -e DB_NAME=your_db_name \
+      -p your_django_port:your_django_port \
+      username/repo-name:tag
+  ```
+
 ```
-- Build Dockerfile
-- Build docker-compose.yml
-- docker-compose -up -- build (docker compose build && docker compose up)
-- docker login
-- docker build -t <default - latest> username/repo-name
-- docker push username/repo-name
+- 
+- 
 - docker ps -a OR docker container ls  # all container
 - docker image ls OR docker images -a  # all images
 - docker network ls    # all networks
-- docker network create my-network  # create a new network
-- docker run -d --name farmers-app --network farmers-network \
-  -e DB_HOST=farmers-db \
-  -e DB_USER=your_db_user \
-  -e DB_PASSWORD=your_db_password \
-  -e DB_NAME=your_db_name \
-  -p your_django_port:your_django_port \
-  parthib23/farmers-api:latest
-- docker run -d --name farmers-db --network farmers-network \
-  -e POSTGRES_USER=your_db_user \
-  -e POSTGRES_PASSWORD=your_db_password \
-  -e POSTGRES_DB=your_db_name \
-  -p 5432:5432 \
+-   # create a new network
+- 
+- 
   postgres:17.4-bookworm
