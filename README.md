@@ -136,7 +136,7 @@ After building your project by docker in your local IDE , now its time to push i
         docker container ls  # all container
     ```
 
-### Local Execution
+### Local Context
 - Build the project
   
   ```bash
@@ -153,7 +153,7 @@ After building your project by docker in your local IDE , now its time to push i
       docker-compose up --build
   ```
   
-### Global Execution
+### Global Context
 - Login to Docker-Hub
   for first-time , maybe you need to put a one-time code in the docker-hub website to authenticate
 
