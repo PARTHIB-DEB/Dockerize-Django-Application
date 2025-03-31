@@ -8,6 +8,8 @@ By defeault when you are locally building the project with docker , the containe
 This tutorial cheatsheet is all about dockerizing a working django backend who throws REST APIS like spiderman's web to you and your frontend 🕸 . **It doesn't tell you anything about django but mostly about the hosting process in docker .**
 
 For those who know nothing but nuts in docker :suspect: , follow this tutorial - [link](https://docker-curriculum.com/)
+Install Docker - [link](https://docs.docker.com/engine/install/)
+My django + postgres project - [link](https://github.com/PARTHIB-DEB/FARMERS-API)
 
 ## Dockerfile vs docker-compose.yml (or YAML) 👦 😎
 
@@ -88,8 +90,18 @@ After building your project by docker in your local IDE , now its time to push i
 - In local IDE , when you build your project using **docker-compose.yml** , both services (django and postgres here) get created .
 - But when you push your project after building with docker (just **docker build**) , you are just pushing your , YOUR PROJECT (not the postgres or other base images)
 - So when you pull your project's image from docker-hub , you need to pull the base-image (postgresql here) seperately
-- Then you need to create a new network and all those images should be connected to that same network
+- Then you need to create a new network and all those images should be connected to that same network , otherwise you may face errors like ```OperationalError``` from         django.
 - After that you can run all the images with necessary aliases (like database details)
+  
+  **Specific to Django**
+
+- When you are creating services of server and database . The name of the database-host SHOULE NOT BE localhost or 127.0.0.1 , rather it must be the name of the service
+  that you have written in the **docker-compose.yml** . Otherwise , be ready to face errors from django like ```ConnectionError```.
+  
+  But why this decision ? Because in your local IDE , the postgres instance (for this case) may run in 5432 , but then it is containerized and put inside a docker network ,
+  each container exposes a public IP , after hiding this local ones , for this case , your database instance will also have a public docker decided IP to which your web
+  server has to connect with its docker decided IP - the database-container name in the database-host helps to make this connection
+
 
 ## Commands
 ### Basic Commands
@@ -138,7 +150,7 @@ After building your project by docker in your local IDE , now its time to push i
 - Or you can do both in one
   
   ```bash
-      docker-compose up -- build
+      docker-compose up --build
   ```
   
 ### Global Execution
@@ -202,3 +214,5 @@ For that follow my **general docker commands** section ⬆️
       -p your_django_port:your_django_port \
       username/repo-name:tag
   ```
+# Conclusion
+That' it . You have successfully made a django+postgres project , containerized it and ran it using docker . Now I make a small request to everyone of you to star ⭐ this repository , if you have reached upto here by executing all steps in a perfect choronology. See y'all later 👋
