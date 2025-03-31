@@ -23,8 +23,8 @@ But what happens when the server has a database connection ? then you need to cr
 
 The General Structure of a dockerfile for a django-project is -
 ```bash
-     #  This image is taken from docker-hub
-     FROM python:version-nickname
+    #  This image is taken from docker-hub
+    FROM python:version-nickname
 
     # To set some ENV variables directly in dockerfile
     # Tells to show standard errors in logfile 
