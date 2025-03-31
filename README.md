@@ -108,6 +108,9 @@ After building your project by docker in your local IDE , now its time to push i
 
 
 ## Commands
+
+All the commands has to be written in your own local terminal , the context specifies about the status of the images  (either you have made it locally or you have pulled it from docker hub and running it locally)
+
 ### Basic Commands
 
 - See all docker images
