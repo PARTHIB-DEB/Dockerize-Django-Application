@@ -91,18 +91,52 @@ After building your project by docker in your local IDE , now its time to push i
 - Then you need to create a new network and all those images should be connected to that same network
 - After that you can run all the images with necessary aliases (like database details)
 
-## Commands 
+## Commands
+### Basic Commands
+
+- See all docker images
+  
+  ```bash
+      docker image ls
+  ```
+
+  **OR**
+  
+  ```bash
+      docker images -a  # all images
+  ```
+
+- See all docker networks
+
+  ```bash
+      docker network ls    # all networks
+  ```
+  
+- List and view all containers of docker
+  
+```bash
+    docker ps -a
+```
+
+**OR**
+
+```bash
+    docker container ls  # all container
+```
 
 ### Local Execution
 - Build the project
+  
   ```bash
       docker compose build
   ```
 - Run the build
+  
   ```bash
       docker compose up
   ```
 - Or you can do both in one
+  
   ```bash
       docker-compose up -- build
   ```
@@ -110,15 +144,18 @@ After building your project by docker in your local IDE , now its time to push i
 ### Global Execution
 - Login to Docker-Hub
   for first-time , maybe you need to put a one-time code in the docker-hub website to authenticate
+
   ```bash
       docker login
   ```
 
 - Build the project
+  
   ```bash
       docker build -t <default - latest> username/repo-name .
   ```
 - Push the build to docker-hub
+  
   ```bash
       docker push username/repo-name:tag
   ```
@@ -126,31 +163,37 @@ Hereafter I suggest you to stop all containers and their images to start over an
 For that follow my **general docker commands** section ⬆️
 
 - Create your own network of type **bridge** in your docker installed machine
+  
   ```bash
       docker network create my-network    # change my-network to your favorite name
   ```
 - Pull the image of your project from docker
+  
   ```bash
       docker pull username/repo-name:tag
   ```
 - Pull the base image / independent dependencies' images / postgresl's image (for this cheatsheet)
+  
   ```bash
       docker pull postgreseql:version-tagname
   ```
 - Connect all images to your network
+  
   ```bash
       docker network connect NETWORK-NAME/ID CONTAINER-NAME/ID
   ```
 - Run all images
   Why didn't you built now ? becaue you already sent your built-files to docker-hub , so now you are just pulling and running it . Same happens for base images
+  
     ```bash
+        # Run the BASE-IMAGE atfirst
                 docker run -d --name database-container-name --network my-network \
           -e POSTGRES_USER=your_db_user \
           -e POSTGRES_PASSWORD=your_db_password \
           -e POSTGRES_DB=your_db_name \
           -p 5432:5432 \
 
-    
+        # Run your project's image now
           docker run -d --name your-project-container-name --network my-network \
       -e DB_HOST=farmers-db \
       -e DB_USER=your_db_user \
@@ -159,14 +202,3 @@ For that follow my **general docker commands** section ⬆️
       -p your_django_port:your_django_port \
       username/repo-name:tag
   ```
-
-```
-- 
-- 
-- docker ps -a OR docker container ls  # all container
-- docker image ls OR docker images -a  # all images
-- docker network ls    # all networks
--   # create a new network
-- 
-- 
-  postgres:17.4-bookworm
