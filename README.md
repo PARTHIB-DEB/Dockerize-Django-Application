@@ -114,15 +114,15 @@ After building your project by docker in your local IDE , now its time to push i
   
 - List and view all containers of docker
   
-```bash
-    docker ps -a
-```
-
-**OR**
-
-```bash
-    docker container ls  # all container
-```
+    ```bash
+        docker ps -a
+    ```
+    
+    **OR**
+    
+    ```bash
+        docker container ls  # all container
+    ```
 
 ### Local Execution
 - Build the project
