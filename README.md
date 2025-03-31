@@ -55,7 +55,31 @@ This file has an .yml extension which means , it follows YAML syntaxes . Here , 
 The General Structure of a dockerfile for a django-project is -
 
 ```bash
-    
+     services:
+       web:
+         build:
+           context: .     # the current folder is the context
+         ports:
+           - "8000:8000"     # default-port:port-inside-container
+         command: ["sh", "./start.sh"]     # For locally building the project , you can list the command here
+         volumes:
+           - .:/app          # The place where all project folders and files will be stored
+         env_file:
+           - .env          # if there is any environment file
+         depends_on:
+           - postgres_db     # Depends upon another service , which is a postgresql service here - postgres_db
+       
+       postgres_db:
+         image: postgres:version-nickname     #  This image is taken from docker-hub
+         volumes:
+           - postgres_data:/var/lib/postgresql/data          # The place where all data and postgresql will be stored
+         environment:                                   # To fetch database details from .env file
+           - POSTGRES_DB=${DB_NAME}
+           - POSTGRES_PASSWORD=${DB_PASSWORD}
+           - POSTGRES_USER=${DB_USER}
+     
+     volumes:     # The place where all data and postgresql will be stored
+       postgres_data:
 ```
 
 ## Commands 
