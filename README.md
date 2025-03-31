@@ -11,6 +11,8 @@ For those who know nothing but nuts in docker :suspect: , follow this tutorial -
 
 Install Docker - [link](https://docs.docker.com/engine/install/)
 
+Docker Hub - [link](https://hub.docker.com/)
+
 My django + postgres project - [link](https://github.com/PARTHIB-DEB/FARMERS-API)
 
 ## Dockerfile vs docker-compose.yml (or YAML) 👦 😎
