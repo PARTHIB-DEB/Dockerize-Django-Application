@@ -8,7 +8,9 @@ By defeault when you are locally building the project with docker , the containe
 This tutorial cheatsheet is all about dockerizing a working django backend who throws REST APIS like spiderman's web to you and your frontend 🕸 . **It doesn't tell you anything about django but mostly about the hosting process in docker .**
 
 For those who know nothing but nuts in docker :suspect: , follow this tutorial - [link](https://docker-curriculum.com/)
+
 Install Docker - [link](https://docs.docker.com/engine/install/)
+
 My django + postgres project - [link](https://github.com/PARTHIB-DEB/FARMERS-API)
 
 ## Dockerfile vs docker-compose.yml (or YAML) 👦 😎
