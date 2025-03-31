@@ -50,7 +50,7 @@ The General Structure of a dockerfile for a django-project is -
 ```
 
 ### docker-compose.yml
-This file has an .yml extension which means , it follows YAML syntaxes . Here , like the base image in dockerfile , you create some independent services (for this context , the database is the one) and some other services depends on the independent ones (the backend server is the one dependent service here) , and that's how you made up things to run. This is an additional file, made for dynamic apps. 
+This file has an .yml extension which means , it follows YAML syntaxes . Here , like the base image in dockerfile , you create some independent services (for this context , the database is the one) and some other services depends on the independent ones (the backend server is the one dependent service here) , and that's how you made up things to run. This is an additional file, made for dynamic apps where each of the services are stored in seperate containers. 
 
 The General Structure of a dockerfile for a django-project is -
 
@@ -81,6 +81,15 @@ The General Structure of a dockerfile for a django-project is -
      volumes:     # The place where all data and postgresql will be stored
        postgres_data:
 ```
+## Docker Hub
+After building your project by docker in your local IDE , now its time to push it into some hub - **Docker Hub** . This is the place , where you have to create an account to push repositories . Then you login into docker-hub via your terminal in local IDE , build your project and push it in docker-hub. That's it.
+
+## Important Note 
+- In local IDE , when you build your project using **docker-compose.yml** , both services (django and postgres here) get created .
+- But when you push your project after building with docker (just **docker build**) , you are just pushing your , YOUR PROJECT (not the postgres or other base images)
+- So when you pull your project's image from docker-hub , you need to pull the base-image (postgresql here) seperately
+- Then you need to create a new network and all those images should be connected to that same network
+- After that you can run all the images with necessary aliases (like database details)
 
 ## Commands 
 ```
